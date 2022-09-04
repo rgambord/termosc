@@ -38,15 +38,16 @@ int main(int argc, char *argv[])
   if (tcgetattr(fileno(tty), &old_termios)) err(errno, "tcgetattr");
   struct termios raw_termios = old_termios;
   cfmakeraw(&raw_termios);
+  raw_termios.c_cc[VTIME]=5;
+  raw_termios.c_cc[VMIN]=0;
   if (tcsetattr(fileno(tty), TCSAFLUSH, &raw_termios)) err(errno, "tcsetattr (raw)");
-  
   int Ps = 11;
   fprintf(tty, "\033]%d;?\033\\", Ps);
   int ret = fscanf(tty, "\033]%*d;%*[rgb]%n:%x%n/%x%n/%x%n\033\\", &start, &r, &stop_r, &g, &stop_g, &b, &stop_b);
 
   /* Restore terminal state */
   if (tcsetattr(fileno(tty), TCSAFLUSH, &old_termios)) err(errno, "tcsetattr (restore)");
-  if (ret == EOF || ret != 3) err(errno, "terminal color format not recognized");
+  if (ret == EOF || ret != 3) err(errno=ENOSYS, "terminal color detection");
 
   /* Calculate scale factor for each rgb value */
   int rmax = (1 << (4 * (stop_r - start - 1))) - 1;
