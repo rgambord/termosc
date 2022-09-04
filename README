@@ -1,0 +1,12 @@
+termosc: A simple utility that makes xterm OSC (Operating System Control) queries and parses replies
+
+Version History
+
+** 0.1 **
+Prints luminance of terminal bgcolor
+
+INSTALL
+./configure && make && make install
+
+
+TODO: Extend to support other Ps values and parse results
