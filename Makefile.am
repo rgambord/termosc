@@ -1,3 +1,2 @@
-AUTOMAKE_OPTIONS = foreign
 bin_PROGRAMS = termosc
-termosc_SOURCES = termosc.c
+termosc_SOURCES = src/termosc.c

@@ -2,6 +2,11 @@ termosc: A simple utility that makes xterm OSC (Operating System Control) querie
 
 Version History
 
+** 1.0 **
+Prints rgb values of terminal bgcolor
+Fix bug: RBG -> RGB
+Add feature: luminance output
+
 ** 0.1 **
 Prints luminance of terminal bgcolor
 
